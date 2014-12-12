@@ -1,0 +1,68 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui"
+xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title></title>
+</h:head>
+<f:metadata>
+	<f:event listener="#{usuarioBean.validaUsuario}" type="preRenderView" />
+</f:metadata>
+<h:body>
+
+	<ui:composition template="/template/common/commonLayout.xhtml">
+		<ui:define name="content">
+			<h:form style="margin-top:30px" id="form">
+				<h:panelGrid style="padding:20px" columns="3">
+					Contrato:
+						<p:selectOneMenu id="contrato" value="#{contratoBean.contrato}" required="true">
+							<f:converter converterId="contratoConverter"/>
+							<f:selectItem itemValue="" itemLabel=""/>
+							<f:selectItems value="#{contratoBean.contratos}" var="contrato" itemValue="#{contrato}" itemLabel="#{contrato.comentario}"/>
+							<p:ajax execute="@form" update="dadosContrato" />
+						</p:selectOneMenu>
+						<h:messages for="contrato" style="color:red"/>
+				</h:panelGrid>
+	
+		<h:panelGrid columns="3" style="padding:20px" id="dadosContrato">
+			Data: <p:calendar id="effect" value="#{contratoBean.contrato.data}" effect="fold" required="true"/>
+			<h:messages for="effect" style="color:red"/>
+			
+			Valor: <p:inputText id="valor" style="width:80px" value="#{contratoBean.contrato.valor}" required="true">
+				
+			</p:inputText>
+			<h:messages for="valor" style="color:red"></h:messages>
+			
+			Comentário: <p:inputTextarea id="comentario" rows="6" cols="30" counter="display" maxlength="150" counterTemplate="{0} characters remaining." autoResize="false" value="#{contratoBean.contrato.comentario}" required="true"/>
+    		<h:messages for="comentario" style="color:red"/>
+    		
+    		<p/>			 <h:outputText id="display" /> <h:outputText></h:outputText>
+			
+			Status:
+			<p:selectOneMenu id="status" value="#{contratoBean.contrato.status}" required="true">
+				<f:converter converterId="statusConverter"/>
+				<f:selectItem itemLabel="" itemValue="" />
+				<f:selectItems value="#{statusBean.statusList}" var="status" itemValue="#{status}" itemLabel="#{status.nome}" />
+			</p:selectOneMenu>
+			<h:messages for="status" style="color:red"/>
+			
+			Orçamento:
+			<p:selectOneMenu id="orcamento" value="#{contratoBean.contrato.orcamento}" required="true">
+				<f:converter converterId="orcamentoConverter"/>
+				<f:selectItem itemLabel="" itemValue=""/>
+				<f:selectItems value="#{orcamentoBean.orcamentos}" var="orcamento" itemValue="#{orcamento}" itemLabel="#{orcamento.comentario}"/>
+			</p:selectOneMenu>
+			<h:messages for="orcamento" style="color:red"/>	
+			
+		</h:panelGrid>
+		
+		<h:commandButton style="margin-left:40%; margin-bottom:10px; box-shadow: 2px 2px 5px rgba(0,0,0,0.5);" id="botao" value="Adicionar"
+						action="#{contratoBean.atualizarContrato}"></h:commandButton>
+	</h:form>
+	</ui:define>
+
+	</ui:composition>
+		
+</h:body>
+</html>

@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core" 
+xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>SICAPRO</title>
+</h:head>
+<f:metadata>
+    <f:event listener="#{usuarioBean.validaUsuario}" type="preRenderView" />
+</f:metadata>
+<h:body>
+	<ui:composition template="/template/common/commonLayout.xhtml">
+		<ui:define name="content">
+			<h3 style="text-align:justify;margin:150px 30px">Este projeto foi desenvolvido pelos Alunos: Jeferson Euclides e Rodrigo Adriano, para obtenção de nota parcial na discliplina
+			de Laboratório de Programação VI, disciplina esta ministrada pelo Prof. Me. Roberto Ribeiro Rocha.
+			O SICAPRO (Sistema Integrado de Cadastro e Apoio a Projeto) é um sistema web que visa auxiliar no gerenciamento de projeto,
+			apresentando opções de cadastro, atualizações e deleções e relatórios conforme solicitado pelo cliente.
+			O código do projeto está disponível pelo github: <a href="https://github.com/roadris/Sicapro" target="_blank">Rodrigo</a> /
+			<a href="https://github.com/JefersonS" target="_blank"> Jeferson </a></h3>
+			
+		</ui:define>
+		<ui:define name="footer">
+			<h2>J/D Developers System - Sistema Integrado de Cadastro e Apoio a Projetos - Univás (Laboratório de Programação VI)</h2>
+		</ui:define>
+		
+		
+	</ui:composition>
+	
+	
+</h:body>
+</html>

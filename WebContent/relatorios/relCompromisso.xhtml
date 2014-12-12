@@ -1,0 +1,36 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">  
+<h:head>
+	<title></title>
+</h:head>
+<f:metadata>
+	<f:event listener="#{usuarioBean.validaUsuario}" type="preRenderView" />
+</f:metadata>
+<h:body>
+	<ui:composition template="/template/common/commonLayout.xhtml">
+		<ui:define name="contentrel">
+			<p:dataTable resizableColumns="true" var="compromisso" value="#{compromissoBean.compromissos}">
+				<p:column style="width: 100px" headerText="Data">
+					<h:outputText value="#{compromisso.data}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+				<p:column style="width: 50px" headerText="Hora">
+					<h:outputText value="#{compromisso.hora}" />
+				</p:column>
+				<p:column style="width: 120px" headerText="Comentário">
+					<h:outputText value="#{compromisso.comentario}" />
+				</p:column>
+				<p:column style="width: 250px" headerText="Cliente">
+					<h:outputText value="#{clienteBean.setValor(compromisso.idcliente)}">
+					</h:outputText>
+				</p:column>						
+			</p:dataTable>
+		</ui:define>
+	</ui:composition> 
+</h:body>
+
+</html>

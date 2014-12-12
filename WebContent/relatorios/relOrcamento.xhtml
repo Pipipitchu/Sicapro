@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title></title>
+</h:head>
+<f:metadata>
+	<f:event listener="#{usuarioBean.validaUsuario}" type="preRenderView" />
+</f:metadata>
+<h:body>
+	<ui:composition template="/template/common/commonLayout.xhtml">
+		<ui:define name="contentrel">
+			<p:dataTable resizableColumns="true" var="orcamento" value="#{orcamentoBean.orcamentos}">
+				<p:column style="width: 250px" headerText="Data">
+					<h:outputText value="#{orcamento.data}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+				<p:column style="width: 250px" headerText="Valor">
+					<h:outputText value="#{orcamento.valor}">
+					</h:outputText>
+				</p:column>
+				<p:column style="width: 250px" headerText="Comentário">
+					<h:outputText value="#{orcamento.comentario}" />
+				</p:column>
+				<p:column style="width: 200px" headerText="Status">
+					<h:outputText value="#{statusBean.setValor(orcamento.status)}" />
+				</p:column>
+				<p:column style="width: 100px" headerText="Cliente">
+					<h:outputText value="#{clienteBean.setValor(orcamento.cliente)}" />
+				</p:column>
+				<p:column style="width: 200px" headerText="Funcionario">
+					<h:outputText value="#{funcionarioBean.setValor(orcamento.funcionario)}" />
+				</p:column>
+				<p:column style="width: 100px" headerText="Serviço">
+					<h:outputText value="#{servicoBean.setValor(orcamento.servico)}" />
+				</p:column>
+			</p:dataTable>
+		</ui:define>
+	</ui:composition> 
+</h:body>
+
+</html>

@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title></title>
+</h:head>
+<f:metadata>
+	<f:event listener="#{usuarioBean.validaUsuario}" type="preRenderView" />
+</f:metadata>
+<h:body>
+	<ui:composition template="/template/common/commonLayout.xhtml">
+		<ui:define name="contentrel">
+			<p:dataTable resizableColumns="true"  var="lancamento" value="#{lancamentoBean.lancamentos}">
+				<p:column style="width: 250px" headerText="Descrição">
+				<h:outputText value="#{lancamento.descricao}" />
+				</p:column>
+				<p:column style="width: 250px" headerText="Data">
+					<h:outputText value="#{lancamento.data}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+				<p:column style="width: 250px" headerText="Tipo">
+					<h:outputText value="#{lancamento.tipo}" />
+				</p:column>
+				<p:column style="width: 200px" headerText="Qtde">
+					<h:outputText value="#{lancamento.quantidade}" />
+				</p:column>
+				<p:column style="width: 100px" headerText="Valor">
+					<h:outputText value="#{lancamento.valor}" />
+				</p:column>
+				<p:column style="width: 200px" headerText="Comentário">
+					<h:outputText value="#{lancamento.comentario}" />
+				</p:column>
+				<p:column style="width: 100px" headerText="Cliente">
+					<h:outputText value="#{clienteBean.setValor(lancamento.cliente)}" />
+				</p:column>
+				<p:column style="width: 100px" headerText="Funcionário">
+					<h:outputText value="#{funcionarioBean.setValor(lancamento.funcionario)}" />
+				</p:column>						
+			</p:dataTable>
+		</ui:define>
+	</ui:composition> 
+</h:body>
+
+</html>

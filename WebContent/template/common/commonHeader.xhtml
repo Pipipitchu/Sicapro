@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<body>
+	<ui:composition>
+		<h:form class="form">
+			<p:growl id="messages" />
+
+			<p:menubar>
+				<p:submenu label="Clientes" icon="ui-icon-person">
+				
+						<p:menuitem value="Novo" url="/novo/newCliente.xhtml" />
+						<p:menuitem value="Atualizar" url="/atualizar/updateCliente.xhtml" />
+						<p:menuitem value="Deletar" url="/deletar/deletarCliente.xhtml" />
+									
+				</p:submenu>
+				
+				<p:submenu label="Contratos" icon="ui-icon-pencil">
+				
+						<p:menuitem value="Novo" url="/novo/newContrato.xhtml" />
+						<p:menuitem value="Atualizar" url="/atualizar/updateContrato.xhtml" />
+						<p:menuitem value="Deletar" url="/deletar/deletarContrato.xhtml" />
+				</p:submenu>
+
+				<p:submenu label="Orçamentos" icon="ui-icon-pencil">
+				
+						<p:menuitem value="Novo" url="/novo/newOrcamento.xhtml" />
+						<p:menuitem value="Atualizar" url="/atualizar/updateOrcamento.xhtml" />
+						<p:menuitem value="Deletar" url="/deletar/deletarOrcamento.xhtml" />
+				</p:submenu>
+
+			<p:submenu label="Serviços" icon="ui-icon-pencil">
+				
+						<p:menuitem value="Novo" url="/novo/newServico.xhtml" />
+						<p:menuitem value="Atualizar" url="/atualizar/updateServico.xhtml" />
+						<p:menuitem value="Deletar" url="/deletar/deletarServico.xhtml" />
+				</p:submenu>
+
+			<p:submenu label="Compromissos" icon="ui-icon-check">
+				
+						<p:menuitem value="Novo" url="/novo/newCompromissos.xhtml" />
+						<p:menuitem value="Atualizar" url="/atualizar/updateCompromissos.xhtml" />
+						<p:menuitem value="Deletar" url="/deletar/deletarCompromisso.xhtml" />
+				</p:submenu>
+
+			<p:submenu label="Funcionários" icon="ui-icon-person">
+				
+					<p:menuitem value="Novo" url="/novo/newFuncionario.xhtml" />
+						<p:menuitem value="Atualizar" url="/atualizar/updateFuncionario.xhtml" />
+						<p:menuitem value="Deletar" url="/deletar/deletarFuncionario.xhtml" />
+				</p:submenu>
+				
+			<p:submenu label="Cargos">
+				
+					<p:menuitem value="Novo" url="/novo/newCargo.xhtml" />
+						<p:menuitem value="Atualizar" url="/atualizar/updateCargo.xhtml" />
+						<p:menuitem value="Deletar" url="/deletar/deletarCargo.xhtml" />
+				</p:submenu>
+			
+			<p:submenu label="Lançamentos" icon="ui-icon-search">
+				
+					<p:menuitem value="Novo" url="/novo/newLancamento.xhtml" />
+						<p:menuitem value="Atualizar" url="/atualizar/updateLancamento.xhtml" />
+						<p:menuitem value="Deletar" url="/deletar/deletarLancamento.xhtml" />
+				</p:submenu>
+			
+			<p:submenu label="Status" icon="ui-icon-check">
+				
+					<p:menuitem value="Novo" url="/novo/newStatus.xhtml" />
+						<p:menuitem value="Atualizar" url="/atualizar/updateStatus.xhtml" />
+						<p:menuitem value="Deletar" url="/deletar/deletarStatus.xhtml" />
+				</p:submenu>
+			
+			<p:submenu label="Relatorios" icon="ui-icon-document">
+					<p:menuitem value="Cliente" url="/relatorios/relCliente.xhtml" />
+					<p:menuitem value="Compromisso" url="/relatorios/relCompromisso.xhtml" />
+					<p:menuitem value="Funcionario" url="/relatorios/relFuncionario.xhtml" />
+					<p:menuitem value="Lancamento" url="/relatorios/relLancamento.xhtml" />
+					<p:menuitem value="Orcamento" url="/relatorios/relOrcamento.xhtml" />
+				</p:submenu>
+			
+			<p:menuitem icon="ui-icon-home" style="margin-left:1030px" value="Home" url="../novo/index.xhtml" />
+			<p:menuitem icon="ui-icon-extlink"  style="float:right; margin-right: 20px" value="Logout" action="#{usuarioBean.logout}" />
+			</p:menubar>
+		</h:form>
+	</ui:composition>
+</body>
+</html>

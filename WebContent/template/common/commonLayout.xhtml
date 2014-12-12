@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<style type="text/css">
+	body{
+		background-image: url("../imagens/fundos.jpg");
+		background-repeat:no-repeat;
+		background-size: 100%;
+		background-attachment:fixed;
+		padding: 0px;
+		margin: 0px;
+		background-color: #cccccc;
+	}
+	#header{
+		margin: 10px 20px;
+		text-align: center;
+		box-shadow: 5px 5px 10px rgba(0,0,0,0.7);
+		
+	}
+	#content{
+		margin: 20px 380px;
+		background-color: white;
+		box-shadow: 5px 5px 10px rgba(0,0,0,0.7);
+		
+	}
+	#contentrel{
+		margin:20px 50px;
+		background-color: white;
+		box-shadow: 5px 5px 10px rgba(0,0,0,0.7);
+	}
+	#footer{
+			width: 98%;
+			
+			margin: 0px 10px 10px 10px;
+			background-color: #dddddd;
+			text-align: center;
+			box-shadow: 5px 5px 10px rgba(0,0,0,0.7);
+			position: absolute;
+			bottom: 10px;
+		}
+	
+	
+</style>
+<h:head>
+	<h:outputStylesheet name="common-style.css" library="css" />
+</h:head>
+<h:body>
+
+	<div id="page">
+		<div id="header">
+			<ui:insert name="header">
+				<ui:include src="/template/common/commonHeader.xhtml" />
+			</ui:insert>
+		</div>
+	</div>
+	<div id="content">
+		<ui:insert name="content">
+			<ui:include src="/template/common/commonContent.xhtml" />
+		</ui:insert>
+
+	</div>
+	<div id="contentrel">
+		<ui:insert name="contentrel">
+			<ui:include src="/template/common/commonContent.xhtml" />
+		</ui:insert>
+
+	</div>	
+	<div id="footer">
+		<ui:insert name="footer">
+			<ui:include src="/template/common/commonFooter.xhtml" />
+		</ui:insert>
+	</div>
+	
+</h:body>
+</html>

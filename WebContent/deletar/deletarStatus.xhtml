@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui"
+xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+</h:head>
+<f:metadata>
+	<f:event listener="#{usuarioBean.validaUsuario}" type="preRenderView" />
+</f:metadata>
+<h:body>
+	<ui:composition template="/template/common/commonLayout.xhtml">
+		<ui:define name="content">
+			<h:form id="deletaStatus">
+				<p:dataTable value="#{statusBean.statusList}" var="status">
+					
+					<p:column>
+						<f:facet name="header">Identificador</f:facet>
+						#{status.idstatus}
+					</p:column>
+			
+					<p:column>
+						<f:facet name="header">Descricao</f:facet>
+						#{status.nome}
+					</p:column>
+					
+					<p:column>
+						<p:commandButton value="Delete" action="#{statusBean.deletarStatus(status)}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</ui:define>
+	</ui:composition>  
+</h:body>
+</html>

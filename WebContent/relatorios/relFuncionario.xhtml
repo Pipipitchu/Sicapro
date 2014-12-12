@@ -1,0 +1,57 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title></title>
+</h:head>
+<f:metadata>
+	<f:event listener="#{usuarioBean.validaUsuario}" type="preRenderView" />
+</f:metadata>
+<h:body>
+	<ui:composition template="/template/common/commonLayout.xhtml">
+		<ui:define name="contentrel">
+			<p:dataTable resizableColumns="true" var="funcionario" value="#{funcionarioBean.funcionarios}">
+				<p:column style="width: 250px" headerText="Nome">
+					<h:outputText value="#{funcionario.nome}" />
+				</p:column>
+				<p:column style="width: 250px" headerText="Endereço">
+					<h:outputText value="#{funcionario.endereco}">
+					</h:outputText>
+				</p:column>
+				<p:column style="width: 50px" headerText="Nº">
+					<h:outputText value="#{funcionario.numero}" />
+				</p:column>
+				<p:column style="width: 100px" headerText="Bairro">
+					<h:outputText value="#{funcionario.bairro}" />
+				</p:column>
+				<p:column style="width: 200px" headerText="Cidade">
+					<h:outputText value="#{funcionario.cidade}" />
+				</p:column>
+				<p:column style="width: 100px" headerText="CEP">
+					<h:outputText value="#{funcionario.cep}" />
+				</p:column>
+				<p:column style="width: 200px" headerText="UF">
+					<h:outputText value="#{funcionario.uf}" />
+				</p:column>
+				<p:column style="width: 100px" headerText="Telefone">
+					<h:outputText value="#{funcionario.telefone}" />
+				</p:column>
+				<p:column style="width: 100px" headerText="Celular">
+					<h:outputText value="#{funcionario.celular}" />
+				</p:column>
+				<p:column style="width: 250px" headerText="Email">
+					<h:outputText value="#{funcionario.email}" />
+				</p:column>
+				<p:column style="width: 100px" headerText="Data Cadastro">
+					<h:outputText value="#{funcionario.datacadastro}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+			</p:dataTable>
+		</ui:define>
+	</ui:composition> 
+</h:body>
+
+</html>

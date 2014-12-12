@@ -1,0 +1,59 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core" 
+xmlns:p="http://primefaces.org/ui"
+xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title></title>
+</h:head>
+<f:metadata>
+	<f:event listener="#{usuarioBean.validaUsuario}" type="preRenderView" />
+</f:metadata>
+<h:body>
+
+	<ui:composition template="/template/common/commonLayout.xhtml">
+		<ui:define name="content">
+			<h:form style="margin-top:30px" id="form">
+				<h:panelGrid style="padding:20px" columns="3">
+					Compromisso:
+						<p:selectOneMenu id="compromisso" value="#{compromissoBean.compromisso}" required="true">
+							<f:converter converterId="compromissoConverter"/>
+							<f:selectItem itemValue="" itemLabel=""/>
+							<f:selectItems value="#{compromissoBean.compromissos}" var="compromisso" itemValue="#{compromisso}" itemLabel="#{compromisso.comentario}"/>
+							<p:ajax execute="@form" update="dadosCompromisso" />
+						</p:selectOneMenu>
+						<h:messages for="compromisso" style="color:red"/>
+				</h:panelGrid>
+				
+				<h:panelGrid columns="3" style="padding:20px" id="dadosCompromisso">	
+					Data: <p:calendar id="effect" value="#{compromissoBean.compromisso.data}" effect="fold" required="true"/>
+					<h:messages for="effect" style="color:red"/>
+					
+					Hora: <p:inputMask id="hora" style="width:50px" value="#{compromissoBean.compromisso.hora}" mask="99:99" required="true"/>
+					<h:messages for="hora" style="color:red"/>
+					
+					Comentário: <p:inputTextarea id="comentario" rows="6" cols="30" counter="display" maxlength="150" counterTemplate="{0} characters remaining." autoResize="false" value="#{compromissoBean.compromisso.comentario}" required="true"/>
+					<h:messages for="comentario" style="color:red"/>
+					
+		    		<p/>		 <h:outputText id="display" />   <h:outputText value=""></h:outputText>
+					
+					
+					Cliente:
+					<p:selectOneMenu id="cliente" value="#{compromissoBean.compromisso.idcliente}" required="true">
+						<f:converter converterId="clienteConverter"/>
+			            <f:selectItem itemLabel="" itemValue="" />
+			        <f:selectItems value="#{clienteBean.clientes}" var="cliente" itemValue="#{cliente}" itemLabel="#{cliente.nome}" />
+		        	</p:selectOneMenu>
+		        	<h:messages for="cliente" style="color:red"/>
+			        
+					</h:panelGrid>
+		
+		<h:commandButton style="margin-left:40%; margin-bottom:10px; box-shadow: 2px 2px 5px rgba(0,0,0,0.5);" id="botao" value="Atualizar"
+						action="#{compromissoBean.atualizarCompromisso}"></h:commandButton>
+		</h:form>
+	</ui:define>
+
+	</ui:composition>
+		
+</h:body>
+</html>

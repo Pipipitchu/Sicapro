@@ -1,0 +1,78 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui"
+xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title></title>
+</h:head>
+<f:metadata>
+	<f:event listener="#{usuarioBean.validaUsuario}" type="preRenderView" />
+</f:metadata>
+<h:body>
+	<ui:composition template="/template/common/commonLayout.xhtml">
+		<ui:define name="content">
+
+	<h:form style="margin-top:30px">
+		<h:panelGrid style="padding:20px" columns="3">
+			Descrição: <p:inputText id="descricao" style="margin:5px;  width:300px;padding:5px" value="#{lancamentoBean.lancamento.descricao}" required="true">
+				<f:validateLength minimum="3" maximum="50" />
+				<f:validateRegex pattern="([a-zA-Z áéíóúàèìòùÁÉÍÓÚÀÈÌÒÙâêîôûÂÊÎÔÛãõÃÕ']){0,50}" />
+			</p:inputText>
+			<h:messages for="descricao" style="color:red"/>
+			
+			Data: <p:calendar id="effect" style="margin:5px" value="#{lancamentoBean.lancamento.data}" effect="fold" required="true"/>
+			<h:messages for="effect" style="color:red"/>
+			
+			Tipo: <p:selectOneMenu id="console" value="#{lancamentoBean.lancamento.tipo}" style="width:125px; margin:5px" required="true">
+            		<f:selectItem itemLabel="" itemValue="" />
+            		<f:selectItem itemLabel="Receita" itemValue="Receita" />
+            		<f:selectItem itemLabel="Despesa" itemValue="Despesa" />
+           	</p:selectOneMenu>
+           	<h:messages for="console" style="color:red"/>
+           	
+			Quantidade: <p:inputText id="quantidade" style="margin:5px; width:50px" value="#{lancamentoBean.lancamento.quantidade}" required="true">
+				<f:validateLength minimum="1" maximum="5" />
+				<f:convertNumber integerOnly="true" type="number" />
+			</p:inputText>
+			<h:messages for="quantidade" style="color:red"/>
+			
+			Valor: <p:inputText id="valor" style="margin:5px; width:80px" value="#{lancamentoBean.lancamento.valor}" required="true">
+				<f:convertNumber minFractionDigits="2" />
+			</p:inputText>
+			<h:messages for="valor" style="color:red"/>
+			
+			
+			Cliente:
+			<p:selectOneMenu id="cliente" style="margin:5px" value="#{lancamentoBean.lancamento.cliente}" required="true">
+				<f:converter converterId="clienteConverter"/>
+				<f:selectItem itemLabel="" itemValue=""/>
+				<f:selectItems value="#{clienteBean.clientes}" var="cliente" itemValue="#{cliente}" itemLabel="#{cliente.nome}"/>
+			</p:selectOneMenu>
+			<h:messages for="cliente" style="color:red"/>
+
+			Funcionário:
+			<p:selectOneMenu id="funcionario" style="margin:5px" value="#{lancamentoBean.lancamento.funcionario}" required="true">
+				<f:converter converterId="funcionarioConverter"/>
+				<f:selectItem itemLabel="" itemValue=""/>
+				<f:selectItems value="#{funcionarioBean.funcionarios}" var="funcionario" itemValue="#{funcionario}" itemLabel="#{funcionario.nome}"/>
+			</p:selectOneMenu>
+			<h:messages for="funcionario" style="color:red"/>
+			
+			Comentário: <p:inputTextarea id="comentario" style="margin:5px" rows="6" cols="30" counter="display" maxlength="150" counterTemplate="{0} characters remaining." autoResize="false" value="#{lancamentoBean.lancamento.comentario}" required="true"/>
+			<h:messages for="comentario" style="color:red"/>
+			
+    		<p/>			 <h:outputText id="display" /> <h:outputText></h:outputText>			
+			
+		</h:panelGrid>
+		
+		<h:commandButton style="margin-left:40%; margin-bottom:10px; box-shadow: 2px 2px 5px rgba(0,0,0,0.5);" id="botao" value="Adicionar"
+						action="#{lancamentoBean.novoLancamento}"></h:commandButton>
+	</h:form>
+	
+	</ui:define>
+
+	</ui:composition>
+		
+</h:body>
+</html>

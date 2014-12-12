@@ -1,0 +1,115 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui"
+xmlns:ui="http://java.sun.com/jsf/facelets">  
+<h:head>
+	<title></title>
+</h:head>
+<f:metadata>
+	<f:event listener="#{usuarioBean.validaUsuario}" type="preRenderView" />
+</f:metadata>
+<h:body>
+
+	<ui:composition template="/template/common/commonLayout.xhtml">
+		<ui:define name="content">    
+	<h:form style="margin-top:30px" id="form">
+		<h:panelGrid style="padding:20px" columns="3" >
+			Cliente:
+				<p:selectOneMenu id="cliente" value="#{clienteBean.cliente}" required="true">
+					<f:converter converterId="clienteConverter"/>
+					<f:selectItem itemValue="" itemLabel=""/>
+					<f:selectItems value="#{clienteBean.clientes}" var="cliente" itemValue="#{cliente}" itemLabel="#{cliente.nome}"/>
+					<p:ajax execute="@form" update="dadosCliente" />
+				</p:selectOneMenu>
+				<h:messages for="cliente" style="color:red"/>
+		</h:panelGrid>
+		
+		<h:panelGrid style="padding:20px" columns="3" id="dadosCliente">
+			Nome: <p:inputText id="nome" style="margin:5px; width:300px" value="#{clienteBean.cliente.nome}" required="true">
+				<f:validateLength minimum="5" maximum="50" />
+				<f:validateRegex pattern="([a-zA-Z áéíóúàèìòùÁÉÍÓÚÀÈÌÒÙâêîôûÂÊÎÔÛãõÃÕ]){0,50}" />
+			</p:inputText>
+			<h:messages for="nome" style="color:red"/>
+			
+			Endereço: <p:inputText id="endereco" style="margin:5px; width:300px" value="#{clienteBean.cliente.endereco}" required="true">
+				<f:validateLength minimum="3" maximum="50" />
+				<f:validateRegex pattern="([a-zA-Z áéíóúàèìòùÁÉÍÓÚÀÈÌÒÙâêîôûÂÊÎÔÛãõÃÕ]){0,50}" />
+			</p:inputText>
+			<h:messages for="endereco" style="color:red"/>
+			
+			Nº: <p:inputText id="numero" style="margin:5px; width:50px" value="#{clienteBean.cliente.numero}" required="true">
+				<f:validateLength minimum="1" maximum="5" />
+				<f:validateRegex pattern="([0-9]){0,5}" />
+			</p:inputText>
+			<h:messages for="numero" style="color:red"/>
+			
+			Bairro: <p:inputText id="bairro" style="margin:5px; width:200px" value="#{clienteBean.cliente.bairro}" required="true">
+				<f:validateLength minimum="3" maximum="50" />
+				<f:validateRegex pattern="([a-zA-Z áéíóúàèìòùÁÉÍÓÚÀÈÌÒÙâêîôûÂÊÎÔÛãõÃÕ]){0,50}" />
+			</p:inputText>
+			<h:messages for="bairro" style="color:red"/>
+				
+			
+			Tipo de CPF:
+			<h:selectOneRadio id="tipo_cpf" required="true" value="#{cPFBean.tipoCpf}">
+		        <f:selectItem id="id1" itemLabel="Pessoa Física" itemValue="fisica" />
+		        <f:selectItem id="id2" itemLabel="Pessoa Jurídica" itemValue="juridica" />
+		        <p:ajax listener="#{cPFBean.mudaCpf}" update="cpf" event="change" />
+	        </h:selectOneRadio>
+			<h:messages for="tipo_cpf" style="color:red"/>
+			
+			Documento: <p:inputMask id="cpf" style="margin:5px" value="#{clienteBean.cliente.numdocumento}" mask="#{cPFBean.maskCpf}" disabled="#{cPFBean.disabled}" required="true">
+			</p:inputMask>
+			<h:messages for="cpf" style="color:red"/>
+			
+			Estado:
+			<p:selectOneMenu id="estado" style="margin:5px" value="#{clienteBean.cliente.uf}" required="true">			
+	            <f:selectItem itemLabel="" itemValue="" />
+	            <f:selectItems value="#{estadoBean.estados}" var="estado" itemValue="#{estado.id}" itemLabel="#{estado.nome}"/>
+	            <p:ajax execute="@form" listener="#{cidadeBean.populateCidade(clienteBean.cliente.uf)}" update="cidade"/>
+        	</p:selectOneMenu>
+			<h:messages for="estado" style="color:red"/>
+			
+			Cidade:
+        	<p:selectOneMenu id="cidade" style="margin:5px" value="#{clienteBean.cliente.cidade}" required="true">
+	            <f:selectItem itemLabel="" itemValue="" />
+	            <f:selectItems value="#{cidadeBean.cidades}" var="cidade" itemValue="#{cidade.id}" itemLabel="#{cidade.nome} "/>
+        	</p:selectOneMenu>
+			<h:messages for="cidade" style="color:red"/>
+			
+			CEP: <p:inputMask id="cep" style="margin:5px; width:100px" value="#{clienteBean.cliente.cep}" required="true" mask="99999-999">
+			</p:inputMask>
+			<h:messages for="cep" style="color:red"/>
+			
+			Telefone: <p:inputMask id="telfone" style="margin:5px; width:125px" value="#{clienteBean.cliente.telefone}" required="true" mask="(99)9999-9999">
+			</p:inputMask>
+			<h:messages for="telfone" style="color:red"/>
+			
+			Celular: <p:inputMask id="celular" style="margin:5px; width:125px" value="#{clienteBean.cliente.celular}" required="true" mask="(99)9999-9999">
+			</p:inputMask>
+			<h:messages for="celular" style="color:red"/>
+			
+			E-mail: <p:inputText id="e_mail" style="margin:5px; width:200px" value="#{clienteBean.cliente.email}" required="true">
+				<f:validator validatorId="custom.emailValidator" />
+			</p:inputText>
+			<h:messages for="e_mail" style="color:red"/>
+			
+			Data de cadastro: <p:calendar style="margin:5px" id="effect" value="#{clienteBean.cliente.datacadastro}" effect="fold" required="true"/> 
+			<h:messages for="effect" style="color:red"/>
+			
+			
+			
+		</h:panelGrid>
+		
+		<h:commandButton style="margin-left:200px; margin-bottom:10px; box-shadow: 2px 2px 5px rgba(0,0,0,0.5);" id="botao" value="Atualizar"
+						action="#{clienteBean.atualizarCliente}"></h:commandButton>
+		
+	</h:form>
+	
+	</ui:define>
+
+	</ui:composition>      
+	
+</h:body>
+</html>

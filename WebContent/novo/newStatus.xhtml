@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core" 
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title></title>
+</h:head>
+<f:metadata>
+	<f:event listener="#{usuarioBean.validaUsuario}" type="preRenderView" />
+</f:metadata>
+<h:body>
+	<ui:composition template="/template/common/commonLayout.xhtml">
+		<ui:define name="content">
+	<h:form style="margin-top:30px">
+		<h:panelGrid style="padding:20px" columns="3">
+			Nome: <p:inputText id="nome" style="margin:5px; width:300px" value="#{statusBean.status.nome}" required="true">
+				<f:validateLength minimum="5" maximum="50" />
+				<f:validateRegex pattern="([a-zA-Z áéíóúàèìòùÁÉÍÓÚÀÈÌÒÙâêîôûÂÊÎÔÛãõÃÕ]){0,50}" />
+			</p:inputText>
+			<h:messages for="nome" style="color:red"/>
+			
+			Descrição: <p:inputText id="descricao" style="margin:5px; width:300px" value="#{statusBean.status.descricao}" required="true">
+				<f:validateLength minimum="3" maximum="50" />
+				<f:validateRegex pattern="([a-zA-Z áéíóúàèìòùÁÉÍÓÚÀÈÌÒÙâêîôûÂÊÎÔÛãõÃÕ]){0,50}" />
+			</p:inputText>
+			<h:messages for="descricao" style="color:red"/>
+			
+			
+		</h:panelGrid>
+		<h:commandButton style="margin-left:40%; margin-bottom:10px; box-shadow: 2px 2px 5px rgba(0,0,0,0.5);" id="botao" value="Adicionar"
+						action="#{statusBean.novoStatus}"></h:commandButton>
+	</h:form>
+	</ui:define>
+
+	</ui:composition>
+</h:body>
+</html>

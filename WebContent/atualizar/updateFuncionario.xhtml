@@ -1,0 +1,119 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui"
+xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title></title>
+</h:head>
+<f:metadata>
+	<f:event listener="#{usuarioBean.validaUsuario}" type="preRenderView" />
+</f:metadata>
+<h:body>
+	<ui:composition template="/template/common/commonLayout.xhtml">
+		<ui:define name="content">
+	<h:form id="form" style="padding:20px">
+		<h:panelGrid style="padding:20px" columns="3">
+			Funcionario:
+				<p:selectOneMenu id="funcionario" value="#{funcionarioBean.funcionario}" required="true">
+					<f:converter converterId="funcionarioConverter"/>
+					<f:selectItem itemValue="" itemLabel=""/>
+					<f:selectItems value="#{funcionarioBean.funcionarios}" var="funcionario" itemValue="#{funcionario}" itemLabel="#{funcionario.nome}"/>
+					<p:ajax execute="@form" update="dadosFuncionario" />
+				</p:selectOneMenu>
+				<h:messages for="funcionario" style="color:red"/>
+		</h:panelGrid>
+	
+		<h:panelGrid  style="padding:20px" columns="3" id="dadosFuncionario">			
+			Cargo: 			
+			<p:selectOneMenu id="cargo" value="#{funcionarioBean.funcionario.cargo}" required="true">
+				<f:converter converterId="cargoConverter"/>
+				<f:selectItem itemValue="" itemLabel=""/>
+				<f:selectItems value="#{cargoBean.cargos}" var="cargo" itemValue="#{cargo}" itemLabel="#{cargo.cargo}"/>
+			</p:selectOneMenu>
+			<h:messages for="cargo" style="color:red"/>
+
+			Nome: <p:inputText id="nome" style="margin:5px; width:300px" value="#{funcionarioBean.funcionario.nome}" required="true">
+				<f:validateLength minimum="5" maximum="50" />
+				<f:validateRegex pattern="([a-zA-Z áéíóúàèìòùÁÉÍÓÚÀÈÌÒÙâêîôûÂÊÎÔÛãõÃÕ']){0,50}" />
+			</p:inputText>
+			<h:messages for="nome" style="color:red"/>
+			
+			
+			Endereço: <p:inputText id="endereco" style="margin:5px; width:300px" value="#{funcionarioBean.funcionario.endereco}" required="true">
+				<f:validateLength minimum="3" maximum="50" />
+				<f:validateRegex pattern="([a-zA-Z áéíóúàèìòùÁÉÍÓÚÀÈÌÒÙâêîôûÂÊÎÔÛãõÃÕ']){0,50}" />
+			</p:inputText>
+			<h:messages for="endereco" style="color:red"/>
+			
+			Nº: <p:inputText id="numero" style="margin:5px; width:50px" value="#{funcionarioBean.funcionario.numero}" required="true">
+				<f:validateLength minimum="1" maximum="5" />
+				<f:validateRegex pattern="([0-9]){0,5}" />
+			</p:inputText>
+			<h:messages for="numero" style="color:red"/>
+			
+			Bairro: <p:inputText id="bairro" style="margin:5px; width:200px" value="#{funcionarioBean.funcionario.bairro}" required="true">
+				<f:validateLength minimum="3" maximum="50" />
+				<f:validateRegex pattern="([a-zA-Z áéíóúàèìòùÁÉÍÓÚÀÈÌÒÙâêîôûÂÊÎÔÛãõÃÕ']){0,50}" />
+			</p:inputText>
+			<h:messages for="bairro" style="color:red"/>
+			
+			Estado:
+			<p:selectOneMenu id="estado" style="margin:5px" value="#{funcionarioBean.funcionario.uf}" required="true">			
+	            <f:selectItem itemLabel="" itemValue="" />
+	            <f:selectItems value="#{estadoBean.estados}" var="estado" itemValue="#{estado.id}" itemLabel="#{estado.nome}"/>
+	            <p:ajax execute="@form" listener="#{cidadeBean.populateCidade(funcionarioBean.funcionario.uf)}" update="cidade"/>
+        	</p:selectOneMenu>
+			<h:messages for="estado" style="color:red"/>
+
+			Cidade:
+        	<p:selectOneMenu id="cidade" style="margin:5px" value="#{funcionarioBean.funcionario.cidade}" required="true">
+	            <f:selectItem itemLabel="" itemValue="" />
+	            <f:selectItems value="#{cidadeBean.cidades}" var="cidade" itemValue="#{cidade.id}" itemLabel="#{cidade.nome} "/>
+        	</p:selectOneMenu>
+			<h:messages for="cidade" style="color:red"/>
+
+			CEP: <p:inputMask id="cep" style="margin:5px; width:100px" value="#{funcionarioBean.funcionario.cep}" required="true" mask="99999-999">
+			</p:inputMask>
+			<h:messages for="cep" style="color:red"/>
+			
+			Telefone: <p:inputMask id="telefone" style="margin:5px; width:125px" value="#{funcionarioBean.funcionario.telefone}" required="true" mask="(99)9999-9999">
+			</p:inputMask>
+			<h:messages for="telefone" style="color:red"/>
+			
+			Celular: <p:inputMask id="celular" style="margin:5px; width:125px" value="#{funcionarioBean.funcionario.celular}" required="true" mask="(99)9999-9999">
+			</p:inputMask>
+			<h:messages for="celular" style="color:red"/>
+			
+			E-mail: <p:inputText id="e_mail" style="margin:5px; width:200px" value="#{funcionarioBean.funcionario.email}" required="true">
+				<f:validator validatorId="custom.emailValidator" />
+			</p:inputText>
+			<h:messages for="e_mail" style="color:red"/>
+
+			Usuário:<p:inputText id="usuario" style="margin:5px; width:300px" value="#{funcionarioBean.funcionario.usuario}" required="true">
+				<f:validateLength minimum="3" maximum="50" />
+				<f:validateRegex pattern="([a-zA-Z0-9 áéíóúàèìòùÁÉÍÓÚÀÈÌÒÙâêîôûÂÊÎÔÛãõÃÕ']){0,50}" />
+			</p:inputText>
+			<h:messages for="usuario" style="color:red"/>
+			
+			Senha:<p:password id="senha" style="margin:5px; width:300px" value="#{funcionarioBean.funcionario.senha}" required="true">
+				<f:validateLength minimum="3" maximum="50" />
+				<f:validateRegex pattern="([a-zA-Z0-9 áéíóúàèìòùÁÉÍÓÚÀÈÌÒÙâêîôûÂÊÎÔÛãõÃÕ']){0,50}" />
+			</p:password>
+			<h:messages for="senha" style="color:red"/>
+			
+			Data: <p:calendar style="margin:5px" id="effect" value="#{funcionarioBean.funcionario.datacadastro}" effect="fold" required="true"/> 
+			<h:messages for="effect" style="color:red"/>
+			
+			
+		</h:panelGrid>
+		
+		<h:commandButton style="margin-left:150px; margin-bottom:10px; box-shadow: 2px 2px 5px rgba(0,0,0,0.5);" id="botao" value="Atualizar"
+						action="#{funcionarioBean.atualizarFuncionario}"></h:commandButton>
+	</h:form>
+	
+	</ui:define>
+
+	</ui:composition>
+</h:body>
+</html>

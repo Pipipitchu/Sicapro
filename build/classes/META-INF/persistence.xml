@@ -1,0 +1,34 @@
+<persistence version="2.0"
+             xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+             http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+             
+             <persistence-unit name="postgre">
+             	<class>mapping.Cargos</class>
+				<class>mapping.Cidades</class>
+				<class>mapping.Clientes</class>
+             	<class>mapping.Compromissos</class>
+             	<class>mapping.Contratos</class>
+             	<class>mapping.CPFBean</class>
+             	<class>mapping.Estados</class>
+             	<class>mapping.Funcionarios</class>
+             	<class>mapping.Lancamentos</class>
+             	<class>mapping.Orcamentos</class>
+             	<class>mapping.Servicos</class>
+             	<class>mapping.Status</class>
+             	<class>mapping.SubServicos</class>
+             	<class>mapping.SubServicosServicos</class>
+             	<properties>
+             		<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Agape" />
+		            <property name="javax.persistence.jdbc.user" value="postgres" />
+		            <property name="javax.persistence.jdbc.password" value="Jefersonebs" />
+		            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+		            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+		            
+		            <property name="hibernate.hbm2dll.auto" value="update"/>
+		            <property name="hibernate.show_sql" value="true"/>
+		            <property name="hibernate.format_sql" value="true"/>
+             	</properties>
+             </persistence-unit>
+</persistence>

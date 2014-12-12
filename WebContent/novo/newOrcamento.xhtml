@@ -1,0 +1,75 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui"
+xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title></title>
+</h:head>
+<f:metadata>
+	<f:event listener="#{usuarioBean.validaUsuario}" type="preRenderView" />
+</f:metadata>
+<h:body>
+	<ui:composition template="/template/common/commonLayout.xhtml">
+		<ui:define name="content">
+
+	<h:form style="margin-top:30px">
+		<h:panelGrid style="padding:20px" columns="3">
+			Data: <p:calendar  style="margin:5px" id="effect" value="#{orcamentoBean.orcamento.data}" effect="fold" required="true" />
+			<h:messages for="effect" style="color:red"/>
+			
+			Valor: <p:inputText id="valor" style="margin:5px; width:100px" value="#{orcamentoBean.orcamento.valor}" required="true">
+				
+			</p:inputText>
+			<h:messages for="valor" style="color:red"/>
+	
+			Status:
+			<p:selectOneMenu id="status" value="#{orcamentoBean.orcamento.status}" required="true">
+				<f:converter converterId="statusConverter"/>
+				<f:selectItem itemValue="" itemLabel=""/>
+				<f:selectItems value="#{statusBean.statusList}" var="status" itemValue="#{status}" itemLabel="#{status.nome}"/>			
+			</p:selectOneMenu>
+			<h:messages for="status" style="color:red"/>
+			
+			Cliente:
+			<p:selectOneMenu id="cliente" value="#{orcamentoBean.orcamento.cliente}" required="true">
+				<f:converter converterId="clienteConverter"/>
+				<f:selectItem itemValue="" itemLabel=""/>
+				<f:selectItems value="#{clienteBean.clientes}" var="cliente" itemValue="#{cliente}" itemLabel="#{cliente.nome}"/>
+			</p:selectOneMenu>
+			<h:messages for="cliente" style="color:red"/>
+			
+			Funcionário:
+			<p:selectOneMenu id="funcionario"
+						value="#{orcamentoBean.orcamento.funcionario}" required="true">
+						<f:converter converterId="funcionarioConverter" />
+						<f:selectItem itemValue="" itemLabel="" />
+						<f:selectItems value="#{funcionarioBean.funcionarios}"
+							var="funcionario" itemValue="#{funcionario}"
+							itemLabel="#{funcionario.nome}" />
+					</p:selectOneMenu>
+					<h:messages for="funcionario" style="color:red"/>
+			
+			Serviço:
+			<p:selectOneMenu id="servico" value="#{orcamentoBean.orcamento.servico}" required="true">
+				<f:converter converterId="servicoConverter"/>
+				<f:selectItem itemValue="" itemLabel=""/>
+				<f:selectItems value="#{servicoBean.servicos}" var="servico" itemValue="#{servico}" itemLabel="#{servico.nome}"/>			
+			</p:selectOneMenu>
+			<h:messages for="servico" style="color:red"/>
+			
+			Comentário: <p:inputTextarea id="comentario" rows="6" cols="30" counter="display" maxlength="150" counterTemplate="{0} characters remaining." autoResize="false" value="#{orcamentoBean.orcamento.comentario}" required="true"/>
+			<h:messages for="comentario" style="color:red"/>
+			
+    		<p/>			 <h:outputText id="display" /> <h:outputText></h:outputText>			
+			
+		</h:panelGrid>
+		
+		<h:commandButton style="margin-left:40%; margin-bottom:10px; box-shadow: 2px 2px 5px rgba(0,0,0,0.5);" id="botao" value="Adicionar"
+						action="#{orcamentoBean.novoOrcamento}"></h:commandButton>
+	</h:form>
+	</ui:define>
+
+	</ui:composition>
+</h:body>
+</html>

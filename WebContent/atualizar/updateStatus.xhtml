@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui"
+xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title></title>
+</h:head>
+<f:metadata>
+	<f:event listener="#{usuarioBean.validaUsuario}" type="preRenderView" />
+</f:metadata>
+<h:body>
+	<ui:composition template="/template/common/commonLayout.xhtml">
+		<ui:define name="content">
+	<h:form style="margin-top:30px">
+		<h:panelGrid columns="3" style="padding:20px">
+			Status:
+				<p:selectOneMenu id="status" value="#{statusBean.status}" required="true">
+					<f:converter converterId="statusConverter"/>
+					<f:selectItem itemValue="" itemLabel=""/>
+					<f:selectItems value="#{statusBean.statusList}" var="status" itemValue="#{status}" itemLabel="#{status.nome}"/>
+					<p:ajax execute="@form" update="dadosStatus" />
+				</p:selectOneMenu>
+				<h:messages for="status" style="color:red"/>
+		</h:panelGrid>
+	
+		<h:panelGrid columns="3" id="dadosStatus" style="padding:20px">
+			Nome: <p:inputText id="nome" style="margin:5px; width:300px" value="#{statusBean.status.nome}" required="true">
+				<f:validateLength minimum="5" maximum="50" />
+				<f:validateRegex pattern="([a-zA-Z áéíóúàèìòùÁÉÍÓÚÀÈÌÒÙâêîôûÂÊÎÔÛãõÃÕ]){0,50}" />
+			</p:inputText>
+			<h:messages for="nome" style="color:red"/>
+			
+			Descrição: <p:inputText id="descricao" style="margin:5px; width:300px" value="#{statusBean.status.descricao}" required="true">
+				<f:validateLength minimum="3" maximum="50" />
+				<f:validateRegex pattern="([a-zA-Z áéíóúàèìòùÁÉÍÓÚÀÈÌÒÙâêîôûÂÊÎÔÛãõÃÕ]){0,50}" />
+			</p:inputText>
+			<h:messages for="descricao" style="color:red"/>
+			
+			
+		</h:panelGrid>
+		<h:commandButton style="margin-left:40%; margin-bottom:10px; box-shadow: 2px 2px 5px rgba(0,0,0,0.5);" id="botao" value="Atualizar"
+						action="#{statusBean.atualizarStatus}"></h:commandButton>
+	</h:form>
+	</ui:define>
+
+	</ui:composition>
+</h:body>
+</html>
